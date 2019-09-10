@@ -1,0 +1,18 @@
+<mat-toolbar>
+    <span>Taller Requerimientos del software</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['home']">
+        <mat-icon>home</mat-icon>
+        <span>Inicio</span>
+    </button>
+    <button mat-menu-item [routerLink]="['user-list']">
+        <mat-icon>account_circle</mat-icon>
+        <span>Lista de Usuarios</span>
+    </button>
+</mat-menu>
+<router-outlet></router-outlet>
