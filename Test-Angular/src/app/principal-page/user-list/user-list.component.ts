@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../models/user.model';
+import { UserListService } from './user-list.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-list-page',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss']
+  styleUrls: ['./user-list.component.scss'],
+  providers: [UserListService]
 })
-export class UserListPageComponent {
+
+export class UserListPageComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   public users: User[];
   public title: string;
 
-  constructor() {
+  constructor(
+    private userListService: UserListService
+  ) {
+    this.users = [];
     this.title = 'Lista de usuarios';
-    this.users = [
-      { usersPk: 1, name: 'Pedro' },
-      { usersPk: 2, name: 'Juan' },
-      { usersPk: 3, name: 'Lucas' }
-    ];
+  }
+
+  ngOnInit() {
+    this.subscription = this.userListService.getAllUsers().subscribe(
+      users => {
+        this.users = users;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
