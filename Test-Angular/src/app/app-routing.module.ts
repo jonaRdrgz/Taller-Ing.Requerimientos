@@ -3,8 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path:'principal-page',
+    path: 'principal-page',
     loadChildren: 'src/app/principal-page/principal-page.module#PrincipalPageModule'
+  },
+  {
+    path: '',
+    redirectTo: 'principal-page',
+    pathMatch: 'full'
   }
 ];
 
