@@ -10,6 +10,12 @@ const httpOptions = {
 
 @Injectable()
 export class UserListService {
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  getUsers(): Observable<User[]> {
+    const url = `${CoreConstants.API_ENDPOINT}/Users`;
+    return this.http.get<User[]>(url, httpOptions);
+  }
 }
